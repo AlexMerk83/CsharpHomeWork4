@@ -2,19 +2,9 @@
 
 while (isWork)
 {
-    Console.Clear();
+    PrintMainMenu();
 
-    System.Console.WriteLine();
-    System.Console.WriteLine("Homework 4 tasks:");
-    System.Console.WriteLine("1 - Task 25: ");
-    System.Console.WriteLine("2 - Task 27: ");
-    System.Console.WriteLine("3 - Task 29: ");
-    System.Console.WriteLine("0 - Exit");
-    System.Console.Write("Enter a task nunber: ");
-
-    int taskNo = 0;
-
-    if (int.TryParse(Console.ReadLine(), out taskNo))
+    if (int.TryParse(Console.ReadLine(), out int taskNo))
     {
         System.Console.WriteLine();
 
@@ -41,6 +31,19 @@ while (isWork)
 
 }
 
+void PrintMainMenu()
+{
+    Console.Clear();
+
+    System.Console.WriteLine();
+    System.Console.WriteLine("Homework 4 tasks:");
+    System.Console.WriteLine("1 - Task 25: ");
+    System.Console.WriteLine("2 - Task 27: ");
+    System.Console.WriteLine("3 - Task 29: ");
+    System.Console.WriteLine("0 - Exit");
+    System.Console.Write("Enter a task nunber: ");    
+}
+
 void WaitForAnyKey()
 {
         System.Console.WriteLine();
@@ -48,11 +51,44 @@ void WaitForAnyKey()
         Console.ReadKey();
 }
 
+void ClearLine(int lineShift = 0)
+{
+    int currentTop = Console.CursorTop,
+        currentLeft = Console.CursorLeft;
+    
+    Console.SetCursorPosition(0, currentTop + lineShift);
+    Console.Write(new string(' ', Console.WindowWidth)); 
+    Console.SetCursorPosition(currentLeft, currentTop);
+}
+
+int ReadInt(string argument)
+{
+    int intNum = 0,
+        inputFieldX = 0,
+        inputFieldY = 0;
+
+    System.Console.Write($"Enter {argument}: ");
+    inputFieldX = Console.CursorLeft;
+    inputFieldY = Console.CursorTop;
+    while (!int.TryParse(Console.ReadLine(), out intNum))
+    {
+        Console.SetCursorPosition(0, inputFieldY);
+        ClearLine();
+        System.Console.WriteLine($"Enter {argument}: ");
+        System.Console.WriteLine("Input error. This is not an integer number. Try again...");
+        Console.SetCursorPosition(inputFieldX, inputFieldY);
+    }
+
+    ClearLine();
+    
+    return intNum;
+}
+
 // Задача 25: Напишите цикл, который принимает на вход два числа (A и B) и возводит число A в натуральную степень B.
 // 3, 5 -> 243 (3⁵)
 // 2, 4 -> 16
 void Task25()
-{
+{    
 
 }
 
