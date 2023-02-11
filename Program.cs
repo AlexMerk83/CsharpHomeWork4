@@ -120,7 +120,26 @@ void Task25()
 // 9012 -> 12
 void Task27()
 {
+    int num = ReadInt("an integer number");
 
+    System.Console.WriteLine($"The sum of the digits of {num} is {GetDigitsSum(num)}");
+}
+
+int GetDigitsSum(int number)
+{
+    int res = 0;
+    
+    number = int.Abs(number);
+
+    while (number / 10 > 0)
+    {
+        res += number % 10;
+        number /= 10;
+    }
+    
+    res += number;
+
+    return res;
 }
 
 // Задача 29: Напишите программу, которая задаёт массив из 8 элементов и выводит их на экран.
