@@ -51,14 +51,18 @@ void WaitForAnyKey()
         Console.ReadKey();
 }
 
-void ClearLine(int lineShift = 0)
+void ClearLine(int lineShift = 0, bool keepCursor = true)
 {
     int currentTop = Console.CursorTop,
         currentLeft = Console.CursorLeft;
     
     Console.SetCursorPosition(0, currentTop + lineShift);
-    Console.Write(new string(' ', Console.WindowWidth)); 
-    Console.SetCursorPosition(currentLeft, currentTop);
+    Console.Write(new string(' ', Console.WindowWidth));
+
+    if (keepCursor)
+        Console.SetCursorPosition(currentLeft, currentTop);
+    else
+        Console.SetCursorPosition(0, currentTop + lineShift);
 }
 
 int ReadInt(string argument)
@@ -89,7 +93,25 @@ int ReadInt(string argument)
 // 2, 4 -> 16
 void Task25()
 {    
+    System.Console.WriteLine("Enter two integer numbers A and B, B > 0.");
+    
+    int a = ReadInt("A");
+    int b = ReadInt("B");;
 
+    long res = 1;
+
+    while (b <= 0)
+    {
+        System.Console.WriteLine("Please enter B > 0.");
+        ClearLine(-2, false);
+        b = ReadInt("B");
+    }   
+
+    for (int i = 0; i < b; i++)
+        res *= a;
+    
+    //System.Console.WriteLine($"{a} to the power of {b} is {res}");
+    System.Console.WriteLine("{0} to the power of {1} is {2:N0}", a, b, res);
 }
 
 // Задача 27: Напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе.
