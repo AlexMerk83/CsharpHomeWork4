@@ -147,5 +147,72 @@ int GetDigitsSum(int number)
 // 6, 1, 33 -> [6, 1, 33]
 void Task29()
 {
+    bool isWorkTask = true;
 
+    while (isWorkTask)
+    {
+        int[] array = new int[8];
+
+        PrintTask29Menu();
+
+        if (int.TryParse(Console.ReadLine(), out int optionNo))
+        {
+            System.Console.WriteLine();
+
+            switch (optionNo)
+            {
+                case 1: ReadIntArray(array); WriteArray(array); break;
+                case 2: FillRandomArray(array, -100, 100); WriteArray(array); break;
+                case 0: isWorkTask = false; break;
+                default: System.Console.WriteLine("There is no such option. Try again."); break;
+            }
+            
+            if (isWorkTask)
+                WaitForAnyKey();
+            
+        }
+        else
+        {
+            System.Console.WriteLine();
+            System.Console.WriteLine("There is no such option. Try again.");
+
+            WaitForAnyKey();
+        }
+
+    }
+}
+
+void PrintTask29Menu()
+{
+    Console.Clear();
+
+    System.Console.WriteLine();
+    System.Console.WriteLine("Choose how to fill the array.");
+    System.Console.WriteLine("1 - Manual filling");
+    System.Console.WriteLine("2 - Random filling");
+    System.Console.WriteLine("0 - Exit to Main Menu");
+    System.Console.Write("Enter a number: ");      
+}
+
+void ReadIntArray(int[] arr)
+{
+    System.Console.WriteLine($"Enter {arr.Length} integer numbers of the Array.");
+
+    for (int i = 0; i < arr.Length; i++)
+        arr[i] = ReadInt($"Array[{i}]");
+}
+
+void FillRandomArray(int[] arr, int rangeMin, int rangeMax)
+{
+    Random rand = new Random();
+    for (int i = 0; i < arr.Length; i++)
+        arr[i] = rand.Next(rangeMin, rangeMax+1);
+}
+
+void WriteArray (int[] arr)
+{
+    System.Console.Write($"{arr[0]}");
+    for (int i = 1; i < arr.Length; i++)
+        System.Console.Write($", {arr[i]}");
+    System.Console.WriteLine();
 }
