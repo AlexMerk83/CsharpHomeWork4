@@ -98,8 +98,6 @@ void Task25()
     int a = ReadInt("A");
     int b = ReadInt("B");;
 
-    long res = 1;
-
     while (b <= 0)
     {
         System.Console.WriteLine("Please enter B > 0.");
@@ -107,11 +105,17 @@ void Task25()
         b = ReadInt("B");
     }   
 
+    System.Console.WriteLine("{0} to the power of {1} is {2:N0}", a, b, Pow(a, b));
+}
+
+long Pow (int a, int b)
+{
+    long res = 1;
+
     for (int i = 0; i < b; i++)
         res *= a;
     
-    //System.Console.WriteLine($"{a} to the power of {b} is {res}");
-    System.Console.WriteLine("{0} to the power of {1} is {2:N0}", a, b, res);
+    return res;
 }
 
 // Задача 27: Напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе.
